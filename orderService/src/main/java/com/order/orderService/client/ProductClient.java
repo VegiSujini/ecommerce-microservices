@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.order.orderService.model.Product;
 
-@FeignClient(name = "product-service", url = "http://localhost:8080")
+@FeignClient(name = "productService", url = "http://localhost:8080")
 public interface ProductClient {
 
     @GetMapping("/products/{id}")
