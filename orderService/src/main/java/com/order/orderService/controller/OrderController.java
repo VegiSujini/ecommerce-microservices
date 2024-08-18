@@ -1,7 +1,10 @@
 package com.order.orderService.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +22,15 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestParam Long productId, @RequestParam int quantity) {
         Order order = orderService.createOrder(productId, quantity);
-        return ResponseEntity.ok(order);
+        if (order != null)
+            return ResponseEntity.ok(order);
+        else
+            return ResponseEntity.status(500).body(null);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getOrder() {
+        List<Order> orders = orderService.getOrders();
+        return ResponseEntity.ok(orders);
     }
 }
